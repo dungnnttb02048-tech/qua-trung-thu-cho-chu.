@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="format-detection" content="telephone=no" />
+  <title>🌕 Trung Thu 🌕 Lời Chúc Cháu Gửi Đến Chú</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      overflow: hidden;
+      background: #0a0618;
+      font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      height: 100vh;
+      width: 100vw;
+      cursor: default;
+      user-select: none;
+    }
+    #scene {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(ellipse at 50% 18%, #1e1245 0%, #0c0820 45%, #06040f 100%);
+      overflow: hidden;
+    }
+
+    /* STARS */
+    .star {
+      position: absolute;
+      background: #fff;
+      border-radius: 50%;
+      animation: twinkle var(--dur) ease-in-out infinite alternate;
+      opacity: 0.7;
+      z-index: 1;
+    }
+    @keyframes twinkle {
+      from { opacity: 0.2; transform: scale(0.6); }
+      to { opacity: 1; transform: scale(1.4); }
+    }
+
+    /* MOON */
+    .moon {
+      position: absolute;
+      top: 5%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 110px;
+      height: 110px;
+      background: radial-gradient(circle at 38% 32%, #fffef0 0%, #ffe9a0 35%, #f5c84a 70%, #e0a020 100%);
+      border-radius: 50%;
+      box-shadow:
+        0 0 45px 18px rgba(255, 220, 100, 0.5),
+        0 0 90px 35px rgba(255, 190, 60, 0.22),
+        inset -16px -10px 30px rgba(180, 130, 40, 0.3);
+      z-index: 3;
+    }
+    .moon::before {
+      content: "";
+      position: absolute;
+      top: 20%; left: 16%;
+      width: 16px; height: 16px;
+      background: rgba(190, 150, 70, 0.22);
+      border-radius: 50%;
+    }
+
+    /* ========== HEART TREE (many small hearts forming a big heart) ========== */
+    .heart-tree {
+      position: absolute;
+      bottom: 9%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 380px;
+      height: 400px;
+      z-index: 6;
+      pointer-events: none;
+    }
+
+    /* Soft glow behind the heart canopy */
+    .heart-glow {
+      position: absolute;
+      bottom: 112px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 300px;
+      height: 280px;
+      background: radial-gradient(ellipse, rgba(255, 120, 180, 0.22) 0%, transparent 68%);
+      border-radius: 50%;
+      z-index: 2;
+      animation: glowSoft 3s ease-in-out infinite;
+    }
+    @keyframes glowSoft {
+      0%, 100% { opacity: 0.7; transform: translateX(-50%) scale(1); }
+      50% { opacity: 1; transform: translateX(-50%) scale(1.06); }
+    }
+
+    /* Trunk */
+    .tree-trunk {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 26px;
+      height: 135px;
+      background: linear-gradient(90deg,
+        #0e0a06 0%,
+        #2a1c12 18%,
+        #3d2a1a 45%,
+        #2a1c12 72%,
+        #120c08 100%);
+      border-radius: 40% 40% 6px 6px / 12px 12px 6px 6px;
+      z-index: 4;
+      box-shadow:
+        inset 3px 0 6px rgba(0,0,0,0.35),
+        inset -2px 0 4px rgba(60,40,20,0.25),
+        2px 4px 10px rgba(0,0,0,0.4);
+    }
+    /* left branch */
+    .tree-trunk::before {
+      content: "";
+      position: absolute;
+      bottom: 58px;
+      left: -14px;
+      width: 16px;
+      height: 38px;
+      background: linear-gradient(115deg, #1a120a, #2e2014 50%, #1a120a);
+      border-radius: 8px 4px 6px 10px;
+      transform: rotate(-38deg);
+      transform-origin: bottom right;
+      box-shadow: inset 1px 0 3px rgba(0,0,0,0.3);
+    }
+    /* right branch */
+    .tree-trunk::after {
+      content: "";
+      position: absolute;
+      bottom: 72px;
+      right: -12px;
+      width: 14px;
+      height: 32px;
+      background: linear-gradient(65deg, #1a120a, #2e2014 50%, #1a120a);
+      border-radius: 4px 8px 10px 6px;
+      transform: rotate(34deg);
+      transform-origin: bottom left;
+      box-shadow: inset -1px 0 3px rgba(0,0,0,0.3);
+    }
+
+    /* Small heart leaves */
+    .leaf-heart {
+      position: absolute;
+      z-index: 5;
+      opacity: 0;
+      animation: appearHeart 1.1s ease-out forwards;
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.15));
+      will-change: transform, opacity;
+    }
+    .leaf-heart.svg-done,
+    .leaf-heart.ready {
+      opacity: 1;
+    }
+    .leaf-heart svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    @keyframes appearHeart {
+      0% { opacity: 0; transform: scale(0) rotate(-25deg); }
+      70% { opacity: 1; transform: scale(1.12) rotate(4deg); }
+      100% { opacity: 1; transform: scale(1) rotate(0deg); }
+    }
+    /* gentle float after appear – stays forever */
+    .leaf-heart.ready {
+      animation: leafSway var(--sway) ease-in-out infinite alternate;
+      opacity: 1 !important;
+    }
+    @keyframes leafSway {
+      from { transform: translateY(0) rotate(-3deg); }
+      to { transform: translateY(-5px) rotate(3deg); }
+    }
+
+    /* HILL */
+    .hill {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 340px;
+      height: 145px;
+      z-index: 5;
+    }
+    .hill-main {
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(180deg, #2e1c42 0%, #1c1230 35%, #120c20 70%, #0a0814 100%);
+      border-radius: 50% 50% 0 0 / 85% 85% 0 0;
+      box-shadow: inset 0 25px 50px rgba(0,0,0,0.55);
+      clip-path: polygon(
+        5% 100%, 8% 70%, 12% 55%, 18% 42%, 25% 32%, 32% 25%, 40% 18%,
+        50% 12%, 60% 18%, 68% 25%, 75% 32%, 82% 42%, 88% 55%, 92% 70%, 95% 100%
+      );
+    }
+    .hill-facet {
+      position: absolute;
+      background: linear-gradient(135deg, rgba(55,38,75,0.5), transparent);
+      border-radius: 30%;
+    }
+    .hill-facet.f1 { top: 18%; left: 22%; width: 55%; height: 35%; }
+    .hill-facet.f2 { top: 35%; left: 45%; width: 35%; height: 30%; transform: rotate(15deg); }
+    .hill-facet.f3 { top: 25%; left: 12%; width: 30%; height: 40%; transform: rotate(-10deg); }
+
+    /* RABBIT WITH FACE */
+    .rabbit {
+      position: absolute;
+      bottom: 118px;
+      left: 50%;
+      transform: translateX(-28%);
+      width: 58px;
+      height: 64px;
+      z-index: 8;
+      filter: drop-shadow(0 3px 6px rgba(0,0,0,0.4));
+    }
+    .r-body {
+      position: absolute;
+      bottom: 2px; left: 10px;
+      width: 36px; height: 32px;
+      background: linear-gradient(160deg, #faf6f0, #ebe4da);
+      border-radius: 48% 48% 42% 42%;
+    }
+    .r-head {
+      position: absolute;
+      bottom: 28px; left: 11px;
+      width: 34px; height: 30px;
+      background: linear-gradient(160deg, #faf6f0, #ebe4da);
+      border-radius: 50%;
+      z-index: 2;
+    }
+    .r-ear {
+      position: absolute;
+      bottom: 50px;
+      width: 12px; height: 28px;
+      background: linear-gradient(90deg, #f5f0e8, #ebe4da);
+      border-radius: 50% 50% 40% 40%;
+      transform-origin: bottom center;
+      z-index: 1;
+    }
+    .r-ear.left { left: 10px; transform: rotate(-15deg); }
+    .r-ear.right { left: 26px; transform: rotate(15deg); }
+    .r-ear::after {
+      content: "";
+      position: absolute;
+      top: 5px; left: 2.5px;
+      width: 6px; height: 16px;
+      background: linear-gradient(180deg, #f8b0c8, #f090b0);
+      border-radius: 50%;
+    }
+    .r-eye {
+      position: absolute;
+      width: 7px; height: 8px;
+      background: #2a1a18;
+      border-radius: 50%;
+      z-index: 3;
+      top: 8px;
+    }
+    .r-eye.left { left: 7px; }
+    .r-eye.right { left: 20px; }
+    .r-eye::after {
+      content: "";
+      position: absolute;
+      top: 1.5px; left: 1.5px;
+      width: 2.5px; height: 2.5px;
+      background: #fff;
+      border-radius: 50%;
+    }
+    .r-nose {
+      position: absolute;
+      top: 16px; left: 50%;
+      transform: translateX(-50%);
+      width: 6px; height: 5px;
+      background: #f0a0b0;
+      border-radius: 50% 50% 45% 45%;
+      z-index: 3;
+    }
+    .r-mouth {
+      position: absolute;
+      top: 20px; left: 50%;
+      transform: translateX(-50%);
+      width: 10px; height: 5px;
+      z-index: 3;
+    }
+    .r-mouth::before,
+    .r-mouth::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      width: 5px; height: 4px;
+      border: 1.5px solid #c08090;
+      border-top: none;
+      border-radius: 0 0 50% 50%;
+    }
+    .r-mouth::before { left: 0; }
+    .r-mouth::after { right: 0; }
+    .r-cheek {
+      position: absolute;
+      top: 14px;
+      width: 8px; height: 5px;
+      background: rgba(255, 150, 170, 0.5);
+      border-radius: 50%;
+      z-index: 2;
+    }
+    .r-cheek.l { left: 2px; }
+    .r-cheek.r { right: 2px; }
+    .r-tail {
+      position: absolute;
+      bottom: 10px; left: -3px;
+      width: 15px; height: 15px;
+      background: #faf6f0;
+      border-radius: 50%;
+    }
+
+    /* GROUND LANTERNS */
+    .ground-lantern {
+      position: absolute;
+      bottom: 12px;
+      width: 42px; height: 32px;
+      background: linear-gradient(180deg, #ffb04a 0%, #e07010 50%, #c05000 100%);
+      border-radius: 5px;
+      box-shadow: 0 0 25px 10px rgba(255, 140, 40, 0.65), 0 0 50px 20px rgba(255, 100, 20, 0.3), inset 0 -6px 10px rgba(0,0,0,0.25);
+      z-index: 9;
+    }
+    .ground-lantern::before {
+      content: "";
+      position: absolute;
+      top: -7px; left: 50%;
+      transform: translateX(-50%);
+      width: 10px; height: 9px;
+      background: #6b4226;
+      border-radius: 2px;
+    }
+    .ground-lantern::after {
+      content: "";
+      position: absolute;
+      top: 6px; left: 50%;
+      transform: translateX(-50%);
+      width: 18px; height: 14px;
+      background: radial-gradient(ellipse, rgba(255,240,180,0.7), transparent 70%);
+      border-radius: 50%;
+    }
+    .ground-lantern.left { left: 14%; }
+    .ground-lantern.right { right: 14%; }
+
+    /* FLOATING LANTERNS */
+    .lantern {
+      position: absolute;
+      width: 48px; height: 68px;
+      cursor: pointer;
+      z-index: 12;
+      transition: filter 0.3s ease;
+      animation:
+        floatStrong var(--float-dur) ease-in-out infinite alternate,
+        driftX var(--drift-dur) ease-in-out infinite alternate,
+        swayRotate var(--sway-dur) ease-in-out infinite alternate;
+      will-change: transform;
+    }
+    .lantern:hover {
+      filter: brightness(1.4) drop-shadow(0 0 16px rgba(255,190,80,0.9));
+      z-index: 25;
+    }
+    @keyframes floatStrong {
+      0%   { transform: translateY(0); }
+      50%  { transform: translateY(-46px); }
+      100% { transform: translateY(-12px); }
+    }
+    @keyframes driftX {
+      from { margin-left: -14px; }
+      to   { margin-left: 18px; }
+    }
+    @keyframes swayRotate {
+      from { rotate: -6deg; }
+      to   { rotate: 7deg; }
+    }
+    .lantern-string {
+      position: absolute;
+      top: -40px; left: 50%;
+      width: 1.5px; height: 42px;
+      background: linear-gradient(180deg, rgba(220,200,160,0.25), rgba(200,180,140,0.75));
+      transform: translateX(-50%);
+    }
+    .lantern-top {
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 18px; height: 12px;
+      background: linear-gradient(180deg, #6d4c41, #4e342e);
+      border-radius: 3px 3px 1px 1px;
+    }
+    .lantern-top::before {
+      content: "";
+      position: absolute;
+      top: -9px; left: 50%;
+      transform: translateX(-50%);
+      width: 2.5px; height: 11px;
+      background: #8d6e63;
+      border-radius: 1px;
+    }
+    .lantern-body {
+      position: absolute;
+      top: 11px; left: 0;
+      width: 48px; height: 48px;
+      border-radius: 7px 7px 12px 12px;
+    }
+    .lantern-body.red {
+      background: linear-gradient(180deg, #ff7070 0%, #e04040 40%, #b02020 100%);
+      box-shadow: 0 0 22px 8px rgba(255, 70, 50, 0.6), inset 0 -10px 14px rgba(0,0,0,0.3);
+    }
+    .lantern-body.orange {
+      background: linear-gradient(180deg, #ffb050 0%, #e08020 40%, #c06000 100%);
+      box-shadow: 0 0 22px 8px rgba(255, 150, 40, 0.6), inset 0 -10px 14px rgba(0,0,0,0.3);
+    }
+    .lantern-body.gold {
+      background: linear-gradient(180deg, #ffe070 0%, #f0b020 40%, #d09000 100%);
+      box-shadow: 0 0 22px 8px rgba(255, 200, 50, 0.6), inset 0 -10px 14px rgba(0,0,0,0.3);
+    }
+    .lantern-body.pink {
+      background: linear-gradient(180deg, #ff90d0 0%, #e050a0 40%, #c03080 100%);
+      box-shadow: 0 0 22px 8px rgba(255, 100, 180, 0.55), inset 0 -10px 14px rgba(0,0,0,0.3);
+    }
+    .lantern-glow {
+      position: absolute;
+      top: 20px; left: 50%;
+      transform: translateX(-50%);
+      width: 22px; height: 22px;
+      background: radial-gradient(circle, rgba(255,245,200,0.95), transparent 70%);
+      border-radius: 50%;
+      animation: glowPulse 2s ease-in-out infinite;
+    }
+    @keyframes glowPulse {
+      0%, 100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
+      50% { opacity: 1; transform: translateX(-50%) scale(1.5); }
+    }
+
+    /* FALLING HEART PETALS */
+    .fall-heart {
+      position: absolute;
+      pointer-events: none;
+      z-index: 10;
+      animation: fallHeart linear forwards;
+      will-change: transform, opacity;
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));
+    }
+    @keyframes fallHeart {
+      0%   { transform: translateY(-20px) rotate(0deg) translateX(0) scale(1); opacity: 0.95; }
+      100% { transform: translateY(110vh) rotate(480deg) translateX(var(--drift)) scale(0.6); opacity: 0.1; }
+    }
+
+    /* SPARKS */
+    .spark {
+      position: absolute;
+      width: 5px; height: 5px;
+      background: radial-gradient(circle, #ffe9a0, #ffb040 50%, transparent);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 11;
+      animation: sparkFloat var(--dur) ease-in-out infinite;
+      box-shadow: 0 0 10px 3px rgba(255, 200, 80, 0.65);
+    }
+    @keyframes sparkFloat {
+      0%   { transform: translate(0, 0) scale(0.5); opacity: 0; }
+      12%  { opacity: 1; }
+      50%  { transform: translate(var(--tx), var(--ty)) scale(1.3); opacity: 0.95; }
+      88%  { opacity: 0.5; }
+      100% { transform: translate(calc(var(--tx) * 1.8), calc(var(--ty) * 2)) scale(0.3); opacity: 0; }
+    }
+
+    /* RISING SMALL HEARTS */
+    .heart-rise {
+      position: absolute;
+      pointer-events: none;
+      z-index: 11;
+      animation: riseHeart var(--dur) ease-out forwards;
+      opacity: 0.9;
+      filter: drop-shadow(0 0 4px rgba(255,100,160,0.5));
+    }
+    @keyframes riseHeart {
+      0%   { transform: translateY(0) scale(0.4); opacity: 0; }
+      20%  { opacity: 0.95; }
+      100% { transform: translateY(-220px) scale(1.2); opacity: 0; }
+    }
+
+    /* WISH MODAL */
+    #wish-modal {
+      position: fixed; inset: 0;
+      background: rgba(5, 3, 15, 0.78);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 100;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.35s ease;
+      backdrop-filter: blur(5px);
+    }
+    #wish-modal.show { opacity: 1; pointer-events: auto; }
+    .wish-card {
+      background: linear-gradient(155deg, #2e1c50, #1a1235 60%, #140e28);
+      border: 2px solid rgba(255, 190, 100, 0.55);
+      border-radius: 22px;
+      padding: 30px 34px;
+      max-width: 380px; width: 90%;
+      text-align: center;
+      box-shadow: 0 0 50px rgba(255, 160, 50, 0.35), 0 25px 60px rgba(0,0,0,0.55);
+      transform: scale(0.82) translateY(25px);
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+    }
+    #wish-modal.show .wish-card { transform: scale(1) translateY(0); }
+    .wish-card::before {
+      content: "💖";
+      font-size: 40px;
+      display: block;
+      margin-bottom: 6px;
+    }
+    .wish-title {
+      color: #ffd890;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+    .wish-text {
+      color: #fff8e8;
+      font-size: 18px;
+      line-height: 1.6;
+      font-weight: 500;
+    }
+    .wish-from {
+      margin-top: 18px;
+      color: #ffb0d0;
+      font-size: 14px;
+      font-style: italic;
+    }
+    .close-btn {
+      position: absolute;
+      top: 12px; right: 16px;
+      background: none; border: none;
+      color: rgba(255,255,255,0.55);
+      font-size: 24px;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .close-btn:hover { color: #fff; }
+
+    .music-btn {
+      position: fixed;
+      bottom: 22px; right: 22px;
+      width: 54px; height: 54px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #ff9440, #e05a00);
+      border: none; color: white;
+      font-size: 23px;
+      cursor: pointer;
+      z-index: 50;
+      box-shadow: 0 4px 22px rgba(255, 100, 30, 0.55);
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .music-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 30px rgba(255, 100, 30, 0.75);
+    }
+    .music-btn.playing { animation: pulseMusic 1.6s ease-in-out infinite; }
+    @keyframes pulseMusic {
+      0%, 100% { box-shadow: 0 4px 22px rgba(255, 100, 30, 0.55); }
+      50% { box-shadow: 0 4px 32px 10px rgba(255, 150, 50, 0.7); }
+    }
+    .title {
+      position: absolute;
+      top: 14px; left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255, 235, 190, 0.92);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-shadow: 0 0 14px rgba(255, 180, 80, 0.55);
+      z-index: 20;
+      white-space: nowrap;
+    }
+    .hint {
+      position: absolute;
+      bottom: 24px; left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255, 220, 180, 0.75);
+      font-size: 13px;
+      z-index: 20;
+      text-align: center;
+      pointer-events: none;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    }
+    .sparkle {
+      position: absolute;
+      width: 4px; height: 4px;
+      background: #fff;
+      border-radius: 50%;
+      animation: sparkleAnim 2.8s ease-in-out infinite;
+      z-index: 4;
+    }
+    @keyframes sparkleAnim {
+      0%, 100% { opacity: 0; transform: scale(0); }
+      50% { opacity: 1; transform: scale(1.7); }
+    }
+
+
+    /* ===== CLOUDS ===== */
+    .cloud {
+      position: absolute;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0.55;
+      animation: cloudDrift var(--dur) linear infinite;
+    }
+    .cloud-part {
+      position: absolute;
+      background: rgba(180, 160, 220, 0.35);
+      border-radius: 50%;
+      filter: blur(1px);
+      box-shadow: 0 0 20px rgba(160, 140, 200, 0.25);
+    }
+    /* softer night-cloud tint */
+    .cloud.soft .cloud-part {
+      background: rgba(140, 130, 190, 0.28);
+    }
+    .cloud.pinkish .cloud-part {
+      background: rgba(200, 150, 200, 0.3);
+    }
+    @keyframes cloudDrift {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(var(--travel)); }
+    }
+
+    /* ===== iPhone / Mobile responsive ===== */
+    @supports (-webkit-touch-callout: none) {
+      body {
+        /* prevent overscroll bounce covering content oddly */
+        overscroll-behavior: none;
+        -webkit-overflow-scrolling: touch;
+      }
+    }
+
+    /* Touch targets */
+    .lantern {
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+    .music-btn {
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      /* safe area for iPhone home indicator */
+      bottom: max(22px, env(safe-area-inset-bottom) + 12px);
+      right: max(22px, env(safe-area-inset-right) + 12px);
+    }
+    .close-btn {
+      -webkit-tap-highlight-color: transparent;
+      padding: 8px;
+    }
+
+    /* Scale scene elements on small screens */
+    @media (max-width: 480px) {
+      .title {
+        font-size: 11px;
+        letter-spacing: 1px;
+        top: 10px;
+        white-space: normal;
+        text-align: center;
+        width: 92%;
+        line-height: 1.35;
+      }
+      .hint {
+        font-size: 11px;
+        bottom: max(18px, env(safe-area-inset-bottom) + 8px);
+        width: 90%;
+      }
+      .moon {
+        width: 80px;
+        height: 80px;
+        top: 4%;
+      }
+      .heart-tree {
+        width: min(340px, 92vw);
+        height: min(360px, 55vh);
+        bottom: 8%;
+      }
+      .tree-trunk {
+        height: 100px;
+        width: 20px;
+      }
+      .hill {
+        width: min(300px, 85vw);
+        height: 120px;
+      }
+      .rabbit {
+        bottom: 95px;
+        transform: translateX(-30%) scale(0.9);
+      }
+      .ground-lantern {
+        width: 32px;
+        height: 24px;
+      }
+      .lantern {
+        width: 40px;
+        height: 58px;
+        transform-origin: center bottom;
+      }
+      .lantern-body {
+        width: 40px;
+        height: 40px;
+      }
+      .wish-card {
+        padding: 24px 20px;
+        max-width: 92vw;
+      }
+      .wish-text {
+        font-size: 16px;
+      }
+      .music-btn {
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .heart-tree {
+        width: 95vw;
+        height: 50vh;
+      }
+      .title {
+        font-size: 10px;
+      }
+    }
+
+    /* Landscape phone */
+    @media (max-height: 420px) and (orientation: landscape) {
+      .moon { width: 60px; height: 60px; top: 3%; }
+      .heart-tree { height: 75vh; bottom: 5%; }
+      .title { font-size: 10px; }
+      .hint { display: none; }
+    }
+
+  </style>
+</head>
+<body>
+  <div id="scene">
+    <div class="title">🌕 TRUNG THU – LỜI CHÚC TỪ CHÁU GỬI CHÚ 🌕</div>
+    <div class="moon"></div>
+
+    <!-- Clouds -->
+    <div class="cloud soft" style="top: 12%; left: -15%; --dur: 80s; --travel: 130vw;">
+      <div class="cloud-part" style="width:70px;height:28px;left:0;top:12px;"></div>
+      <div class="cloud-part" style="width:45px;height:36px;left:25px;top:0;"></div>
+      <div class="cloud-part" style="width:55px;height:30px;left:50px;top:8px;"></div>
+      <div class="cloud-part" style="width:38px;height:24px;left:85px;top:14px;"></div>
+    </div>
+    <div class="cloud pinkish" style="top: 22%; left: -20%; --dur: 110s; --travel: 140vw; animation-delay: -30s;">
+      <div class="cloud-part" style="width:90px;height:32px;left:0;top:14px;"></div>
+      <div class="cloud-part" style="width:50px;height:40px;left:30px;top:0;"></div>
+      <div class="cloud-part" style="width:65px;height:34px;left:60px;top:6px;"></div>
+      <div class="cloud-part" style="width:42px;height:26px;left:105px;top:16px;"></div>
+    </div>
+    <div class="cloud soft" style="top: 8%; left: -10%; --dur: 95s; --travel: 125vw; animation-delay: -55s;">
+      <div class="cloud-part" style="width:55px;height:24px;left:0;top:10px;"></div>
+      <div class="cloud-part" style="width:38px;height:30px;left:20px;top:0;"></div>
+      <div class="cloud-part" style="width:48px;height:26px;left:42px;top:6px;"></div>
+    </div>
+    <div class="cloud pinkish" style="top: 28%; left: -25%; --dur: 125s; --travel: 150vw; animation-delay: -70s;">
+      <div class="cloud-part" style="width:75px;height:28px;left:0;top:12px;"></div>
+      <div class="cloud-part" style="width:48px;height:36px;left:28px;top:0;"></div>
+      <div class="cloud-part" style="width:58px;height:30px;left:55px;top:8px;"></div>
+      <div class="cloud-part" style="width:35px;height:22px;left:95px;top:14px;"></div>
+    </div>
+
+
+    <!-- HEART TREE made of many small hearts -->
+    <div class="heart-tree" id="heartTree">
+      <div class="heart-glow"></div>
+      <div class="tree-trunk"></div>
+    </div>
+
+    <div class="hill">
+      <div class="hill-main"></div>
+      <div class="hill-facet f1"></div>
+      <div class="hill-facet f2"></div>
+      <div class="hill-facet f3"></div>
+    </div>
+
+    <div class="rabbit">
+      <div class="r-ear left"></div>
+      <div class="r-ear right"></div>
+      <div class="r-head">
+        <div class="r-eye left"></div>
+        <div class="r-eye right"></div>
+        <div class="r-nose"></div>
+        <div class="r-mouth"></div>
+        <div class="r-cheek l"></div>
+        <div class="r-cheek r"></div>
+      </div>
+      <div class="r-body"></div>
+      <div class="r-tail"></div>
+    </div>
+
+    <div class="ground-lantern left"></div>
+    <div class="ground-lantern right"></div>
+
+    <!-- Floating lanterns -->
+    <div class="lantern" style="top: 12%; left: 5%; --float-dur: 3.6s; --drift-dur: 5s; --sway-dur: 3.9s;" data-wish="0">
+      <div class="lantern-string"></div><div class="lantern-top"></div><div class="lantern-body red"></div><div class="lantern-glow"></div>
+    </div>
+    <div class="lantern" style="top: 18%; right: 6%; --float-dur: 4.3s; --drift-dur: 5.8s; --sway-dur: 3.5s;" data-wish="1">
+      <div class="lantern-string"></div><div class="lantern-top"></div><div class="lantern-body orange"></div><div class="lantern-glow"></div>
+    </div>
+    <div class="lantern" style="top: 30%; left: 2%; --float-dur: 4s; --drift-dur: 5.3s; --sway-dur: 4.2s;" data-wish="2">
+      <div class="lantern-string"></div><div class="lantern-top"></div><div class="lantern-body gold"></div><div class="lantern-glow"></div>
+    </div>
+    <div class="lantern" style="top: 8%; right: 16%; --float-dur: 4.6s; --drift-dur: 6.2s; --sway-dur: 3.4s;" data-wish="3">
+      <div class="lantern-string"></div><div class="lantern-top"></div><div class="lantern-body pink"></div><div class="lantern-glow"></div>
+    </div>
+    <div class="lantern" style="top: 38%; right: 3%; --float-dur: 4.8s; --drift-dur: 4.9s; --sway-dur: 4.5s;" data-wish="4">
+      <div class="lantern-string"></div><div class="lantern-top"></div><div class="lantern-body red"></div><div class="lantern-glow"></div>
+    </div>
+    <div class="lantern" style="top: 22%; left: 13%; --float-dur: 4.1s; --drift-dur: 5.6s; --sway-dur: 3.8s;" data-wish="5">
+      <div class="lantern-string"></div><div class="lantern-top"></div><div class="lantern-body orange"></div><div class="lantern-glow"></div>
+    </div>
+    <div class="lantern" style="top: 44%; left: 7%; --float-dur: 5s; --drift-dur: 5.2s; --sway-dur: 3.7s;" data-wish="0">
+      <div class="lantern-string"></div><div class="lantern-top"></div><div class="lantern-body gold"></div><div class="lantern-glow"></div>
+    </div>
+    <div class="lantern" style="top: 14%; left: 24%; --float-dur: 4.4s; --drift-dur: 6s; --sway-dur: 4.1s;" data-wish="2">
+      <div class="lantern-string"></div><div class="lantern-top"></div><div class="lantern-body pink"></div><div class="lantern-glow"></div>
+    </div>
+    <div class="lantern" style="top: 33%; right: 13%; --float-dur: 4.2s; --drift-dur: 5.5s; --sway-dur: 4.3s;" data-wish="1">
+      <div class="lantern-string"></div><div class="lantern-top"></div><div class="lantern-body red"></div><div class="lantern-glow"></div>
+    </div>
+    <div class="lantern" style="top: 48%; right: 10%; --float-dur: 5.2s; --drift-dur: 5.9s; --sway-dur: 3.6s;" data-wish="3">
+      <div class="lantern-string"></div><div class="lantern-top"></div><div class="lantern-body orange"></div><div class="lantern-glow"></div>
+    </div>
+    <div class="lantern" style="top: 6%; left: 36%; --float-dur: 4.7s; --drift-dur: 5.7s; --sway-dur: 4s;" data-wish="4">
+      <div class="lantern-string"></div><div class="lantern-top"></div><div class="lantern-body gold"></div><div class="lantern-glow"></div>
+    </div>
+    <div class="lantern" style="top: 26%; right: 26%; --float-dur: 3.9s; --drift-dur: 6.3s; --sway-dur: 4.4s;" data-wish="5">
+      <div class="lantern-string"></div><div class="lantern-top"></div><div class="lantern-body pink"></div><div class="lantern-glow"></div>
+    </div>
+
+    <div class="hint">✨ Ấn vào lồng đèn bay để nhận lời chúc từ cháu ✨</div>
+  </div>
+
+  <div id="wish-modal">
+    <div class="wish-card">
+      <button class="close-btn" onclick="closeWish()">×</button>
+      <div class="wish-title">Lời chúc Trung Thu</div>
+      <div class="wish-text" id="wish-text"></div>
+      <div class="wish-from">— Từ cháu gửi chú yêu quý —</div>
+    </div>
+  </div>
+
+  <button class="music-btn" id="musicBtn" title="Bật / Tắt nhạc">🎵</button>
+  <audio id="bgMusic" loop preload="auto">
+    <source src="https://frequent-yellow-yn5ydoia.edgeone.dev/" type="audio/mpeg" />
+  </audio>
+
+  <script>
+    const wishes = [
+      "Chúc chú Trung Thu vui vẻ, sức khỏe dồi dào, luôn cười thật tươi như ánh trăng rằm!",
+      "Cháu chúc chú luôn hạnh phúc, công việc thuận lợi, và mọi ước mơ đều thành hiện thực dưới ánh trăng đẹp!",
+      "Trung Thu này, cháu muốn nói với chú rằng: Chú là người tuyệt vời nhất! Chúc chú luôn mạnh khỏe và bình an!",
+      "Cháu mong chú luôn được bao quanh bởi tình yêu thương, và mỗi mùa Trung Thu đều ngập tràn niềm vui!",
+      "Ánh trăng sáng, lồng đèn lung linh… cháu chúc chú một mùa Trung Thu thật ấm áp, đầy ắp tiếng cười!",
+      "Cháu gửi đến chú ngàn lời yêu thương: Chúc chú sống thật vui, thật khỏe, và luôn là chỗ dựa vững chắc của cháu!"
+    ];
+
+    const scene = document.getElementById("scene");
+    const heartTree = document.getElementById("heartTree");
+
+    // Colors matching the reference image
+    const heartColors = [
+      "#ff6b9d", "#ff8fab", "#ff4d8a", "#ff2d6f",
+      "#ff9f43", "#ffb347", "#ffa726", "#ffcc80",
+      "#e040fb", "#ba68c8", "#ce93d8", "#f48fb1",
+      "#ff7043", "#ff8a65", "#ffab91",
+      "#f06292", "#ec407a", "#f48fb1"
+    ];
+
+    // SVG heart path
+    function createHeartSVG(size, color) {
+      const s = size;
+      return `<svg viewBox="0 0 32 32" width="${s}" height="${s}">
+        <path fill="${color}" d="M16 28 C16 28, 4 18, 4 11 C4 6.5, 7.5 4, 11 4 C13.5 4, 15.5 5.5, 16 7.5 C16.5 5.5, 18.5 4, 21 4 C24.5 4, 28 6.5, 28 11 C28 18, 16 28, 16 28 Z"/>
+      </svg>`;
+    }
+
+    // Heart parametric equation to place leaves in heart shape
+    // t from 0 to 2PI
+    function heartPoint(t, scaleX, scaleY) {
+      // Classic heart parametric
+      const x = 16 * Math.pow(Math.sin(t), 3);
+      const y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
+      return {
+        x: 50 + (x / 16) * scaleX,   // center at 50%
+        y: 42 + (y / 16) * scaleY    // vertical center of canopy
+      };
+    }
+
+    // Build the heart canopy with many small hearts (appear one by one)
+    const leaves = [];
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || window.innerWidth < 500;
+    const totalLeaves = isMobile ? 180 : 320;
+
+    for (let i = 0; i < totalLeaves; i++) {
+      // Mix of outline + dense interior fill (like the reference image)
+      let px, py;
+      if (i < 110) {
+        // Outline + near outline
+        const t = (i / 110) * Math.PI * 2 + Math.random() * 0.12;
+        const scale = 36 + Math.random() * 5;
+        const p = heartPoint(t, scale, scale * 0.92);
+        px = p.x + (Math.random() - 0.5) * 3.5;
+        py = p.y + (Math.random() - 0.5) * 3.5;
+      } else {
+        // Dense interior fill
+        const t = Math.random() * Math.PI * 2;
+        const r = Math.pow(Math.random(), 0.7) * 0.88; // bias toward outer
+        const scale = 35 * r;
+        const p = heartPoint(t, scale, scale * 0.92);
+        px = p.x + (Math.random() - 0.5) * 4;
+        py = p.y + (Math.random() - 0.5) * 4;
+      }
+
+      // Keep in heart canopy bounds (above trunk)
+      if (px < 6 || px > 94 || py < 14 || py > 80) continue;
+
+      // Smaller variation so denser look like image
+      const size = 11 + Math.random() * 16;
+      const color = heartColors[Math.floor(Math.random() * heartColors.length)];
+      // Still gradual but not too slow with more leaves
+      const delay = (i * 22) + Math.random() * 90;
+
+      const leaf = document.createElement("div");
+      leaf.className = "leaf-heart";
+      leaf.style.width = size + "px";
+      leaf.style.height = size + "px";
+      leaf.style.left = px + "%";
+      leaf.style.bottom = py + "%";
+      leaf.style.animationDelay = delay + "ms";
+      leaf.innerHTML = createHeartSVG(size, color);
+      leaf.style.setProperty("--sway", (2.5 + Math.random() * 2.5) + "s");
+      heartTree.appendChild(leaf);
+      leaves.push(leaf);
+
+      setTimeout(() => {
+        leaf.classList.add("ready");
+      }, delay + 1200);
+    }
+
+    // Stars
+    for (let i = 0; i < 120; i++) {
+      const star = document.createElement("div");
+      star.className = "star";
+      const size = Math.random() * 2.6 + 0.6;
+      star.style.width = size + "px";
+      star.style.height = size + "px";
+      star.style.left = Math.random() * 100 + "%";
+      star.style.top = Math.random() * 75 + "%";
+      star.style.setProperty("--dur", (Math.random() * 3.5 + 1.2) + "s");
+      star.style.animationDelay = Math.random() * 4 + "s";
+      scene.appendChild(star);
+    }
+
+    // Sparkles around moon
+    for (let i = 0; i < 16; i++) {
+      const sp = document.createElement("div");
+      sp.className = "sparkle";
+      const angle = (i / 16) * Math.PI * 2;
+      const r = 65 + Math.random() * 26;
+      sp.style.left = `calc(50% + ${Math.cos(angle) * r}px)`;
+      sp.style.top = `calc(5% + 55px + ${Math.sin(angle) * r * 0.65}px)`;
+      sp.style.animationDelay = (Math.random() * 2.8) + "s";
+      scene.appendChild(sp);
+    }
+
+    // Falling small hearts
+    function createFallHeart() {
+      const el = document.createElement("div");
+      el.className = "fall-heart";
+      const size = 12 + Math.random() * 16;
+      const color = heartColors[Math.floor(Math.random() * heartColors.length)];
+      el.style.left = (15 + Math.random() * 70) + "%";
+      el.style.top = "-5%";
+      el.style.width = size + "px";
+      el.style.height = size + "px";
+      el.style.setProperty("--drift", ((Math.random() - 0.5) * 80) + "px");
+      el.style.animationDuration = (6 + Math.random() * 5) + "s";
+      el.innerHTML = createHeartSVG(size, color);
+      scene.appendChild(el);
+      setTimeout(() => el.remove(), 12000);
+    }
+    setInterval(createFallHeart, 400);
+    for (let i = 0; i < 8; i++) setTimeout(createFallHeart, i * 300);
+
+    // Sparks
+    function createSpark() {
+      const spark = document.createElement("div");
+      spark.className = "spark";
+      spark.style.left = Math.random() * 100 + "%";
+      spark.style.top = (6 + Math.random() * 55) + "%";
+      const tx = (Math.random() - 0.5) * 100;
+      const ty = -50 - Math.random() * 80;
+      spark.style.setProperty("--tx", tx + "px");
+      spark.style.setProperty("--ty", ty + "px");
+      spark.style.setProperty("--dur", (3.2 + Math.random() * 4) + "s");
+      scene.appendChild(spark);
+      setTimeout(() => spark.remove(), 9000);
+    }
+    setInterval(createSpark, 350);
+    for (let i = 0; i < 10; i++) setTimeout(createSpark, i * 280);
+
+    // Rising hearts from tree
+    function createRisingHeart() {
+      const h = document.createElement("div");
+      h.className = "heart-rise";
+      const size = 14 + Math.random() * 14;
+      const color = heartColors[Math.floor(Math.random() * heartColors.length)];
+      h.style.left = (32 + Math.random() * 36) + "%";
+      h.style.bottom = (28 + Math.random() * 25) + "%";
+      h.style.width = size + "px";
+      h.style.height = size + "px";
+      h.style.setProperty("--dur", (2.5 + Math.random() * 2) + "s");
+      h.innerHTML = createHeartSVG(size, color);
+      scene.appendChild(h);
+      setTimeout(() => h.remove(), 5000);
+    }
+    setInterval(createRisingHeart, 600);
+
+    // Lantern clicks
+    document.querySelectorAll(".lantern").forEach(lantern => {
+      lantern.addEventListener("click", () => {
+        const idx = parseInt(lantern.dataset.wish) % wishes.length;
+        document.getElementById("wish-text").textContent = wishes[idx];
+        document.getElementById("wish-modal").classList.add("show");
+      });
+    });
+
+    function closeWish() {
+      document.getElementById("wish-modal").classList.remove("show");
+    }
+    document.getElementById("wish-modal").addEventListener("click", e => {
+      if (e.target.id === "wish-modal") closeWish();
+    });
+
+    // Music
+    const audio = document.getElementById("bgMusic");
+    const musicBtn = document.getElementById("musicBtn");
+    let isPlaying = false;
+    musicBtn.addEventListener("click", () => {
+      if (isPlaying) {
+        audio.pause();
+        musicBtn.textContent = "🎵";
+        musicBtn.classList.remove("playing");
+      } else {
+        audio.play().catch(() => {});
+        musicBtn.textContent = "🔊";
+        musicBtn.classList.add("playing");
+      }
+      isPlaying = !isPlaying;
+    });
+    audio.volume = 0.6;
+    audio.play().then(() => {
+      isPlaying = true;
+      musicBtn.textContent = "🔊";
+      musicBtn.classList.add("playing");
+    }).catch(() => {});
+  </script>
+</body>
+</html>
